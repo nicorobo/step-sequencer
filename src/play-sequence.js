@@ -26,13 +26,13 @@ export const usePlaySequence = (input, output, sequence) => {
 	const [step, isPlaying] = useMIDIClock(input, 6);
 	const currentStep = step % sequence.length;
 	const notesOff = (step) => {
-		sequence[step].notes.forEach((n, i) => {
+		sequence[step].forEach((n, i) => {
 			if (n <= 0) return false;
 			noteOff(scaleNotes[i]);
 		});
 	};
 	const notesOn = (step) => {
-		sequence[step].notes.forEach((n, i) => {
+		sequence[step].forEach((n, i) => {
 			if (n <= 0) return false;
 			noteOn(scaleNotes[i]);
 		});

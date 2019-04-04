@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useContext, useMemo, useCallback } from 'react';
+import { SequenceDispatch } from '../bonus-code';
 import styled from 'styled-components';
 
-const SequencerNote = ({ index, value, onClick }) => {
-	const handleClick = () => {
-		onClick(index, value === 0 ? 1 : 0);
-	};
-	return <Container active={value > 0} onClick={handleClick} />;
+const SequencerNote = ({ col, row, value }) => {
+	const dispatch = useContext(SequenceDispatch);
+	// I'm not sure if using useCallback is doing anything here
+	const handleClick = useCallback(() => dispatch({ type: 'toggle-note', col, row }), [
+		dispatch,
+		row,
+		col,
+	]);
+	return useMemo(() => <Container active={value > 0} onClick={handleClick} />, [value]);
 };
 
 const Container = styled.div`
