@@ -1,21 +1,20 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import SequencerNote from './SequencerNote';
 
-const SequencerColumn = ({ playing, step, notes, updateColumn }) => {
-	const handleNoteChange = (index, value) => {
-		const newNotes = notes.map((n, i) => (i === index ? value : n));
-		updateColumn({ step, notes: newNotes });
-	};
-	return (
-		<Container>
-			<StepToggle playing={playing} />
-			{notes.map((note, i) => (
-				<SequencerNote key={i} index={i} value={note} onClick={handleNoteChange} />
-			))}
-		</Container>
+const SequencerColumn = ({ col, playing, notes }) =>
+	useMemo(
+		() => (
+			<Container>
+				<StepToggle playing={playing} />
+				{notes.map((note, i) => (
+					<SequencerNote key={i} col={col} row={i} value={note} />
+				))}
+			</Container>
+		),
+		[notes, playing]
 	);
-};
+
 const Container = styled.div`
 	margin-right: 0.25rem;
 `;
