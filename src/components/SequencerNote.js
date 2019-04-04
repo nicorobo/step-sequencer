@@ -4,12 +4,7 @@ import styled from 'styled-components';
 
 const SequencerNote = ({ col, row, value }) => {
 	const dispatch = useContext(SequenceDispatch);
-	// I'm not sure if using useCallback is doing anything here
-	const handleClick = useCallback(() => dispatch({ type: 'toggle-note', col, row }), [
-		dispatch,
-		row,
-		col,
-	]);
+	const handleClick = () => dispatch({ type: 'toggle-note', col, row });
 	return useMemo(() => <Container active={value > 0} onClick={handleClick} />, [value]);
 };
 
