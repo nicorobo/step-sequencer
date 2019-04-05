@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useCallback } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { SequenceDispatch } from '../bonus-code';
 import styled from 'styled-components';
 
